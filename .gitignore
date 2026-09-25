@@ -1,0 +1,73 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+
+# Python / Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Node / Web
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Hardware CAD / CAM temporary files
+*.tmp
+*.bak
+*.drl
+*.gbr
+*.kicad_pcb-bak
+
+# Large binary datasets and model checkpoints (placeholder rule)
+*.h5
+*.pt
+*.pth
+*.onnx
+*.weights
+*.bag
+*.pcap
+*.mp4
+*.avi
+*.mkv
+
+# Temporary experiment logs & scratch files
+experiments/logs/*.tmp
+experiments/logs/*.log
+scratch/
+tmp/
