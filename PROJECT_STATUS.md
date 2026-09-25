@@ -15,11 +15,12 @@
 - Sericulture knowledge framework established (silkworm life cycle, instar biology, feeding regimes).
 - Machine research framework initialized (problem definition, cutting mechanics, safety).
 - AI/IoT research framework outlined (sensor trade-offs, edge AI capabilities, closed-loop control).
+- Cyber-physical Digital Twin framework formulated (kinematics, motor ODEs, biomass shear physics, real-time shadow, synthetic data).
 - Prior-art and patent research methodology defined.
 - Daily reporting and research workflow initiated.
 
 ### Current Focus
-- In-depth study of mulberry leaf physical/mechanical properties (shear strength, moisture content, stem diameter distribution).
+- In-depth study of mulberry leaf physical/mechanical properties (shear strength, moisture content, stem diameter distribution) for biomass twin parameterization.
 - Detailed collation of Central Silk Board (CSB) recommendations for instar-wise leaf cut dimensions.
 - Identification of baseline manual cutting metrics (throughput, cut quality, particle distribution).
 

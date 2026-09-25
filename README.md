@@ -52,19 +52,21 @@ The proposed smart cutting architecture integrates sensory feedback with edge in
 |     (Signal Filtering, Preprocessing, Feature Extract)    |
 +-----------------------------------------------------------+
                               |
-                              v
-+-----------------------------------------------------------+
-|                    AI / Decision Layer                    |
-|   (Instar/Feed Sizing Logic, Density Est., Quality Rules)  |
-+-----------------------------------------------------------+
-                              |
-                              v
-+-----------------------------------------------------------+
-|                        Controller                         |
-|           (Microcontroller / Embedded SBC, PID)           |
-+-----------------------------------------------------------+
-                              |
-                              v
+                              +--------------------+
+                              |                    | (Telemetry Stream)
+                              v                    v
++-----------------------------------+   +-----------------------------------+
+|        AI / Decision Layer        |   |      Cyber-Physical Digital Twin  |
+| (Instar Sizing, Density, Rules)   |   | (Multi-Physics Kinematics & ODEs, |
++-----------------+-----------------+   |  Real-Time Shadow, Blade Wear RUL,|
+                  |                     |  Synthetic Fault Generation)      |
+                  v                     +-----------------+-----------------+
++-----------------------------------+                     |
+|            Controller             |<--------------------+ (Model-Based
+|    (Embedded MCU / SBC, PID)      |                        State Estimates)
++-----------------+-----------------+
+                  |
+                  v
 +-----------------------------------------------------------+
 |                     Motor / Actuator                      |
 |       (Feed Rollers, Variable Speed Cutter, Adjuster)     |
@@ -95,6 +97,7 @@ The proposed smart cutting architecture integrates sensory feedback with edge in
 - **Sensory Instrumentation**: Current/torque monitoring, accelerometry for vibration analysis, acoustic emission for cutting sound analysis.
 - **Edge AI & Embedded Computing**: Low-latency inference on resource-constrained compute platforms (e.g., Raspberry Pi, ESP32, edge micro-NPUs).
 - **Closed-Loop Control Systems**: Dynamic feed rate regulation, adaptive blade speed, anti-jamming routines.
+- **Cyber-Physical Digital Twin**: Kinematic/motor multi-physics simulation, virtual commissioning, live IoT telemetry shadow, and synthetic fault dataset generation.
 - **Mechanical Automation & Ergonomics**: Compact feeder designs, operator safety interlocks, ease of cleaning/sanitization.
 - **Patent & Prior-Art Landscape**: Thorough search of global patents and agricultural machinery literature.
 
@@ -120,13 +123,13 @@ mulberry/
 |   |-- 02-sericulture/           # Sericulture practices, silkworm biology, instar feeding
 |   |-- 03-machine/               # Mechanical cutting dynamics, existing machines, safety
 |   |-- 04-ai-ml/                 # Computer vision, edge models, data pipeline
-|   |-- 05-iot-and-control/       # Sensor research, signal processing, closed-loop control
+|   |-- 05-iot-and-control/       # Sensor research, signal processing, closed-loop control, digital twin
 |   |-- 06-patent/                # Prior-art search, innovation concepts, patent study
 |   `-- 07-research/              # Methodology, core research questions, references
 |-- daily-reports/                # Chronological daily engineering logs
 |-- research/                     # Repositories for papers, patent PDFs, datasets
 |-- hardware/                     # BOM, mechanical drawings, circuit schematics
-|-- software/                     # Firmware, computer vision code, control algorithms
+|-- software/                     # Firmware, computer vision code, control algorithms, digital twin
 |-- experiments/                  # Protocols, measurement logs, raw experimental data
 `-- assets/                       # Diagrams, photos, benchmark videos
 ```

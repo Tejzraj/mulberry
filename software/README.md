@@ -6,6 +6,7 @@ This directory houses the embedded firmware, computer vision pipelines, supervis
 - [`firmware/`](firmware/README.md) — Low-level real-time firmware running on the microcontroller (ESP32-S3 / STM32): sensor sampling, stepper pulse generation, BLDC PWM control, and hardware safety state machines.
 - [`computer-vision/`](computer-vision/README.md) — Image acquisition, dataset preprocessing, model training scripts, and edge inference pipelines for leaf detection, quality grading, and defect identification.
 - [`control-system/`](control-system/README.md) — Supervisory closed-loop control routines, dynamic feed rate regulation, anti-jam state machines, and system telemetry.
+- [`digital-twin/`](digital-twin/README.md) — Cyber-physical digital twin simulation, multi-physics kinematics and motor ODEs, live IoT telemetry shadow synchronization, and synthetic data generation.
 
 ## Software Standards
 - **Firmware**: Written in modern C++ (C++17) or C within FreeRTOS; zero dynamic memory allocations in real-time control loops; strict MISRA C guidelines for safety-critical execution.

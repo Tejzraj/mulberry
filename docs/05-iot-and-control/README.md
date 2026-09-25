@@ -10,6 +10,7 @@ This directory focuses on sensory instrumentation, signal conditioning, actuator
 4. [`acoustic-monitoring.md`](acoustic-monitoring.md) — Sound emission analysis, microphone hardware, acoustic signatures of clean shearing vs. crushing, and background noise cancellation.
 5. [`actuator-research.md`](actuator-research.md) — Stepper motors, BLDC drives, pneumatic actuators, solenoids, and linear servos for adaptive mechanical regulation.
 6. [`closed-loop-control.md`](closed-loop-control.md) — Fundamental closed-loop vs. open-loop architectures, end-to-end control flow, PID regulation, and dynamic feed adjustment routines.
+7. [`digital-twin.md`](digital-twin.md) — Cyber-physical architecture, multi-physics kinematics and motor ODEs, biomass cutting resistance modeling, virtual commissioning, and live telemetry shadow state.
 
 ## Engineering Philosophy
 - **Signal Fidelity First**: A sophisticated control or machine learning algorithm cannot compensate for a noisy, unshielded, or poorly placed physical sensor.
