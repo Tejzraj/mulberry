@@ -1,98 +1,80 @@
-# Project Engineering & Research Roadmap
+# Project Engineering Roadmap & Prototype Strategy
 
-This document outlines the phased research and engineering progression for the **Mulberry Smart Cutting Machine**. Every phase defines explicit objectives, entry/exit criteria, and deliverables.
-
----
-
-## Phase Summary Table
-
-| Phase | Title | Focus Area | Status |
-|---|---|---|---|
-| Phase 1 | Domain Research | Botany, Agronomy, Sericulture Biology | In Progress |
-| Phase 2 | Problem Definition | Farmer Needs, Cutting Inefficiencies, Constraints | Pending |
-| Phase 3 | Existing Machine Study | Benchmarking Manual & Motorized Choppers | Pending |
-| Phase 4 | Mechanical Concept | Blade Geometries, Feeder Kinematics, Virtual Commissioning | Pending |
-| Phase 5 | Sensor Selection | Torque, Current, Vibration, Optical, Acoustic | Pending |
-| Phase 6 | Prototype Instrumentation | Test Bench Setup, DAQ, Hardware-in-the-Loop (HIL) | Pending |
-| Phase 7 | Data Collection | Empirical Cutting Datasets (Normal, Jammed, Dull) | Pending |
-| Phase 8 | AI/ML Development | Vision Models, Anomaly Detection, Synthetic Fault Generation | Pending |
-| Phase 9 | Closed-Loop Control | Adaptive Feed Regulation, Live Telemetry Digital Shadow | Pending |
-| Phase 10 | Prototype Testing | Lab & Field Cutting Runs with Silkworm Feeds | Pending |
-| Phase 11 | Optimization | Energy Efficiency, Wear Resistance, Predictive Maintenance | Pending |
-| Phase 12 | Patent & Paper Documentation | Formal Prior-Art Analysis, Academic Publication | Pending |
+> **Project Title**: Design and Development of a Compact Electric Plant Cutting, Gathering and Binding Machine for Future Mulberry Application  
+> **Development Philosophy**:  
+> `PROTOTYPE → TEST → MEASURE → IMPROVE → UPGRADE → MULBERRY FIELD PROTOTYPE`
 
 ---
 
-## Phase Details
+## 1. Five-Stage Progressive Prototype Strategy
 
-### Phase 1 — Domain Research
-- **Objective**: Establish a rigorous biological and agricultural foundation covering mulberry plant physiology, sericulture practices, silkworm instar feeding behaviors, and leaf quality parameters.
-- **Deliverables**: Comprehensive literature synthesis across `docs/01-domain/` and `docs/02-sericulture/`, compiled reference library in `docs/07-research/references.md`.
-- **Entry Criteria**: Project kick-off; repository initialization.
-- **Exit Criteria**: Verified biological guidelines (instar-wise feed dimensions, leaf moisture requirements, harvest schedules) supported by reputable scientific sources (Central Silk Board, ICAR).
+Rather than building a full-scale machine for mature mulberry wood immediately (which carries high mechanical and financial risks), the project advances through five progressive stages:
 
-### Phase 2 — Problem Definition
-- **Objective**: Translate biological feeding requirements and traditional sericulture practices into quantifiable mechanical and control engineering requirements.
-- **Deliverables**: Detailed problem statement in `docs/03-machine/problem-definition.md`, quantitative targets for cutting dimensions, edge quality criteria, throughput targets, and failure modes.
-- **Entry Criteria**: Completion of Phase 1 domain literature review.
-- **Exit Criteria**: Engineering specification document approved with measurable acceptance criteria (e.g., target throughput in kg/hr, allowable bruise percentage, target cut size tolerance).
+```
++-----------------------------------------------------------------------+
+| Stage 1: Prototype-1 (Mini Model)                                     |
+| Test Material: Coriander, Congress grass, soft-stem vegetation        |
+| Focus: Validate cutting, gathering, alignment, binding, release       |
++-----------------------------------+-----------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------+
+| Stage 2: Prototype-1.5                                                |
+| Test Material: Thicker weeds and semi-woody stems                     |
+| Focus: Torque limits, gathering clearance tuning, twine knot strength |
++-----------------------------------+-----------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------+
+| Stage 3: Prototype-2                                                  |
+| Test Material: Small mulberry shoots (tender stems)                   |
+| Focus: Upgraded cutter blades, reinforced shaft, motor load study     |
++-----------------------------------+-----------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------+
+| Stage 4: Field Prototype                                              |
+| Test Material: Mulberry plants under controlled sericulture field     |
+| Focus: Field ground mobility, row alignment, bundle durability        |
++-----------------------------------+-----------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------+
+| Stage 5: Smart Mulberry Machine                                       |
+| Test Material: Full-scale mulberry crop                               |
+| Focus: AI/CV plant detection, auto cutting-height, IoT digital shadow |
++-----------------------------------------------------------------------+
+```
 
-### Phase 3 — Existing Machine Study
-- **Objective**: Conduct systematic benchmarking of existing manual cutting tools, chaff cutters, leaf choppers, and automated agricultural cutters.
-- **Deliverables**: Comparative technical matrix in `docs/03-machine/existing-cutting-methods.md`, failure mode analysis of conventional machines (jamming, blade degradation, uneven cutting).
-- **Entry Criteria**: Approved problem definition and cutting metrics.
-- **Exit Criteria**: Comprehensive prior-art and competitive landscape cataloged; clear identification of technological gaps.
+---
 
-### Phase 4 — Mechanical Concept & Virtual Commissioning
-- **Objective**: Develop conceptual mechanical designs for feeding, cutting, and discharging mulberry leaves and stems; establish initial kinematic simulation model.
-- **Deliverables**: Conceptual CAD/mechanical sketches in `hardware/mechanical/`, trade-off analysis of cutting mechanisms in `docs/03-machine/cutting-mechanisms.md`, initial kinematic and cutting torque multi-physics simulation model in `software/digital-twin/simulation/`.
-- **Entry Criteria**: Benchmarking insights from Phase 3.
-- **Exit Criteria**: Down-selected mechanical architecture with documented design calculations (cutting forces, motor sizing, gear ratios) and validated virtual clearance tolerances.
+## 2. Twelve-Week Implementation Roadmap (Stage 1 / Prototype-1)
 
-### Phase 5 — Sensor Selection & Signal Feasibility
-- **Objective**: Evaluate and select candidate sensors for real-time state estimation (material density, blade dullness, motor load, feed rate, cut quality).
-- **Deliverables**: Evaluated sensor trade-off matrix in `docs/05-iot-and-control/sensor-research.md`, component selection in `hardware/components.md`, sensor datasheets cataloged.
-- **Entry Criteria**: Mechanical architecture down-selection.
-- **Exit Criteria**: Selected sensor suite with defined measurement ranges, sampling frequencies, interfaces, and electrical specs.
+| Week | Milestone / Focus | Key Activities & Deliverables | Primary Responsible Roles |
+|:---:|---|---|---|
+| **Week 1** | **Prior-Art & Reference Machine Study** | Review reaper-binder patents, existing harvesting machines, and reference video mechanisms. Identify cutting, gathering, and binding principles. | All Team Members |
+| **Week 2** | **Vegetation Characterization & Specs** | Measure stem diameters, cutting heights, and bundling specs for coriander, Congress grass, and mulberry baselines. Freeze initial parameters. | Mech Lead 1 & 2 |
+| **Week 3** | **Chassis & Cutter CAD Modelling** | Create 3D CAD models of the 25×25×2 mm MS frame, wheel layout, and rotary cutter assembly. | Mech Lead 1 |
+| **Week 4** | **Gathering, Binding & Electrical Architecture** | Design gathering chute, compression arms, binding ring mechanism. Finalize 24V electrical block diagram and schematic. | Mech Lead 2 & ECE Lead |
+| **Week 5** | **Engineering Calculations & BOM Finalization** | Calculate shaft shear, torque requirements, bearing loads, reduction ratios, motor power. Finalize BOM (target ₹45,000) and verify suppliers. | Mech 1, Mech 2, ECE |
+| **Week 6** | **Component Procurement & Material Sourcing** | Procure MS tubes, 24V LiFePO4 battery, motors, controllers, bearings, twine spool, ESP32, and safety switch. Begin fabrication prep. | All Team Members |
+| **Week 7** | **Frame & Chassis Fabrication** | Cut, weld, and assemble MS chassis, wheel axles, pillow blocks, and motor mounting brackets. | Mech Lead 1 |
+| **Week 8** | **Cutter & Gathering System Installation** | Mount cutter motor, shaft, blade, drive belts/chains, and front gathering guide plates. Conduct initial no-load spin test. | Mech Lead 1 & 2 |
+| **Week 9** | **Binding Mechanism & Guards Installation** | Assemble semi-automatic binding ring, twine tensioner, cutting blade, and all structural protective guards. | Mech Lead 2 |
+| **Week 10** | **Electrical, ESP32 & Sensor Integration** | Install 24V battery, BMS, motor controllers, E-stop, ESP32 MCU, Hall RPM sensor, and ACS712 current monitor. Complete wiring. | ECE Lead & CSE Lead 1 |
+| **Week 11** | **Integrated System Testing & Tuning** | Execute progressive 9-step test plan (no-load → mobility → cutting → gathering → binding on soft stems). Measure RPM, current, slip. | All Team Members |
+| **Week 12** | **Demonstration, Data Analysis & Reporting** | Demonstrate full automated sequence; compile telemetry and performance graphs; draft technical project report and Mulberry upgrade roadmap. | All Team Members |
 
-### Phase 6 — Prototype Instrumentation & Bench Setup
-- **Objective**: Construct an instrumented experimental cutting test-bench with integrated Data Acquisition (DAQ) and Hardware-in-the-Loop (HIL) simulation interface.
-- **Deliverables**: Physical test bench wiring schematics in `hardware/schematics/`, DAQ firmware in `software/firmware/`, HIL virtual simulation test harness in `software/digital-twin/shadow/`, raw signal logging verification.
-- **Entry Criteria**: Sourced sensors, motors, and prototype mechanical frame.
-- **Exit Criteria**: Demonstrated synchronized signal capture (current, vibration, optical frames, acoustic) during live cutting.
+---
 
-### Phase 7 — Empirical Data Collection
-- **Objective**: Execute structured cutting experiments across varying leaf conditions (fresh, wilted, mature shoots, tender shoots) and machine states (sharp blade, worn blade, overloaded feed).
-- **Deliverables**: Labeled experimental dataset cataloged in `research/datasets/`, standardized test protocols in `experiments/protocols/`, data run logs in `experiments/logs/`.
-- **Entry Criteria**: Functional, calibrated DAQ bench.
-- **Exit Criteria**: Minimum target volume of labeled time-series and image data across baseline operational regimes.
+## 3. Prototype-1 Progressive 9-Step Testing Plan
 
-### Phase 8 — AI/ML Development & Edge Optimization
-- **Objective**: Train and evaluate machine learning models for computer vision (leaf stage/quality sorting) and sensor-based condition monitoring (blade wear, jam prediction); synthesize edge cases via digital twin.
-- **Deliverables**: Trained model weights/benchmarks in `software/computer-vision/`, synthetic fault generation datasets in `software/digital-twin/synthetic-data/`, edge deployment benchmarks (latency, memory footprint, accuracy) in `docs/04-ai-ml/edge-ai.md`.
-- **Entry Criteria**: Verified labeled dataset from Phase 7.
-- **Exit Criteria**: Models meeting target inference latency (< 50 ms on target edge device) and accuracy thresholds on hold-out validation sets.
-
-### Phase 9 — Closed-Loop Control & Live Telemetry Shadow
-- **Objective**: Design, implement, and simulate closed-loop control algorithms dynamically adjusting feed speed, blade RPM, or feed clearances based on sensor/AI feedback; synchronize real-time digital shadow.
-- **Deliverables**: Control software in `software/control-system/`, closed-loop architecture analysis in `docs/05-iot-and-control/closed-loop-control.md`, live telemetry shadow state synchronization engine and 3D dashboard in `software/digital-twin/visualization/`.
-- **Entry Criteria**: Calibrated actuators, validated predictive models/rules, and MQTT telemetry broker.
-- **Exit Criteria**: Stable closed-loop response demonstrated without hunting, motor stall, or excessive mechanical oscillation during sudden load variations; virtual twin mirroring physical state with < 100 ms latency.
-
-### Phase 10 — Prototype Testing & Silkworm Feeding Trials
-- **Objective**: Evaluate end-to-end prototype performance in laboratory cutting trials and test cut feed on silkworm colonies.
-- **Deliverables**: Comprehensive test report in `experiments/results/`, cut quality metric evaluations (edge damage, sizing uniformity, moisture retention).
-- **Entry Criteria**: Integrated closed-loop hardware/software cutting prototype.
-- **Exit Criteria**: Quantitative verification of cut quality, safety interlock performance, and biological acceptability of prepared feed.
-
-### Phase 11 — Engineering Optimization & Predictive Maintenance
-- **Objective**: Refine mechanical, electrical, and algorithmic subsystems based on trial data to enhance energy efficiency, reliability, and ergonomics; validate digital twin blade wear prediction.
-- **Deliverables**: Revised BOM (`hardware/bill-of-materials.md`), design for manufacturing (DFM) documentation, optimized control firmware, validated blade Remaining Useful Life (RUL) predictive analytics in `docs/05-iot-and-control/digital-twin.md`.
-- **Entry Criteria**: Field trial analysis from Phase 10.
-- **Exit Criteria**: Final prototype sign-off demonstrating target throughput, reliability, and ease of maintenance; validated digital twin predictive maintenance.
-
-### Phase 12 — Patent & Paper Documentation
-- **Objective**: Compile rigorous scientific documentation, conduct formal patent prior-art novelty analysis, and draft research publications.
-- **Deliverables**: Complete prior-art mapping in `docs/06-patent/prior-art.md`, innovation assessment in `docs/06-patent/innovation-concept.md`, submitted peer-reviewed manuscript or technical project report.
-- **Entry Criteria**: Validated experimental data and prototype validation from Phases 10–11.
-- **Exit Criteria**: Completed project technical documentation, comprehensive research thesis/manuscript, formal patentability assessment.
+1. **Test 1: No-load Motor Test** — Measure RPM, current draw, vibration, and thermal rise for all motors.
+2. **Test 2: Bench Cutter Test** — Validate cutting success, RPM drop, and current spikes on soft stems.
+3. **Test 3: Mobility & Traction Test** — Evaluate speed (0.2–0.5 m/s), wheel slip, steering stability, and ground clearance.
+4. **Test 4: Plant Cutting Field Run** — Test cutting in standing plots of coriander and Congress grass.
+5. **Test 5: Gathering Efficiency Test** — Measure the percentage of cut material gathered into the chute (> 85% target).
+6. **Test 6: Alignment & Binding Test** — Validate bundle compression (50–100 mm dia), string tension, knot/lock, and bundle ejection (> 80% target).
+7. **Test 7: Battery & Electrical Duty Test** — Evaluate continuous runtime (> 30 min), voltage sag under load, and temperature.
+8. **Test 8: Progressive Stem Diameter Test** — Incrementally increase stem hardness to map the mechanical torque boundary.
+9. **Test 9: Controlled Mulberry Shoot Test** — Safe, controlled test on young tender mulberry shoots to establish empirical cutting requirements for Stage 2.

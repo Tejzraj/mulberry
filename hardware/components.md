@@ -1,46 +1,77 @@
-# Hardware Components Selection & Specifications
+# Hardware Components Selection & Specifications (Prototype-1)
 
-## 1. What It Is
-This document details the preliminary evaluation, technical specifications, and selection rationale for off-the-shelf and custom hardware components constituting the physical testbench and prototype cutter.
+> **Project**: Design and Development of a Compact Electric Plant Cutting, Gathering and Binding Machine for Future Mulberry Application  
+> **Target Prototype**: Prototype-1 Mini Model (Electric 24V Architecture)
 
-## 2. Why It Matters
-Selecting inappropriate components (e.g., undersized stepper motors that lose steps under friction, or non-isolated current sensors susceptible to electrical spikes) results in hardware failures, erratic control performance, and escalated prototype development costs.
+---
 
-## 3. Key Concepts & Component Breakdown
+## 1. Overview & Strategy
 
-### 1. Actuation & Motors
-- **Primary Cutting Drum Motor**:
-  - *Candidate*: 750W – 1100W Brushless DC (BLDC) motor (48V DC, rated 3000 RPM, paired with 5:1 planetary reduction or timing belt reduction to achieve 600 RPM at 15–20 N·m torque).
-  - *Alternative*: 1.0 HP Single-phase AC Induction motor with VFD (variable frequency drive).
-- **Feed Mechanism Motor**:
-  - *Candidate*: NEMA 23 or NEMA 34 High-Torque Stepper Motor (3.0–4.5 N·m holding torque), microstepped at 1600 steps/rev, paired with a 5:1 planetary gearbox for high stiffness feed roller drive.
+The Prototype-1 component selection balances affordability, modularity, and rapid prototyping. A 24V DC battery-electric bus is selected over internal combustion (IC) engines to simplify speed control, reduce mechanical vibration, eliminate local emissions, and facilitate sensor/MCU telemetry.
 
-### 2. Instrumentation & Sensors
-- **Motor Current Sensing**: ACS712 / ACS724 (Hall effect, 30A/50A) or low-side 10 mΩ precision shunt with INA240 bidirectional current sense amplifier.
-- **Vibration Sensing**: ADXL345 (3-axis digital I2C/SPI MEMS) or IEPE industrial piezoelectric accelerometer for high-frequency dynamic analysis.
-- **Angular Velocity (RPM)**: Hall effect sensor module paired with neodymium magnets on the cutter drum hub, providing interrupt-driven pulse counting.
-- **Vision Capture**: Raspberry Pi Global Shutter Camera (1.58 MP, Sony IMX296 sensor) or industrial USB3 machine vision camera.
+---
 
-### 3. Compute & Control Hardware
-- **Low-Level Microcontroller**: STM32F4 / ESP32-S3 (FreeRTOS, 1 kHz control loop, hardware PWM, high-speed ADC, CAN/RS485).
-- **High-Level Edge SBC**: Raspberry Pi 5 (4GB / 8GB) with active cooler; optional Hailo-8L M.2 NPU accelerator for real-time vision inference.
+## 2. Component Specifications Breakdown
 
-### 4. Power Supply Subsystem
-- **Mains Input**: 220–240 V AC, 50 Hz, single phase.
-- **DC Power Rails**:
-  - 48V DC / 25A (1200W) switched-mode power supply (SMPS) for BLDC cutter motor.
-  - 24V DC / 10A (240W) for stepper drivers, solenoids, and cooling fans.
-  - 5V DC / 5A regulated buck converter for Raspberry Pi SBC and logic sensors.
+### 2.1 Actuation & Power Transmission
+- **Cutter Motor**:
+  - *Type*: High-torque 24V DC brushed or brushless motor.
+  - *Power Rating*: ~500W nominal.
+  - *Speed & Transmission*: Operating at ~3000 RPM base speed, reduced via a 2-stage pulley/belt or chain drive down to 600–900 RPM at the cutter shaft to deliver high cutting torque and resist plant jams.
+  - *Shaft & Bearings*: Ground 20 mm shaft supported by two UCP 204 pillow-block bearings.
+- **Traction Motor**:
+  - *Type*: 24V geared DC motor with integrated spur or planetary gearbox.
+  - *Power Rating*: ~250W.
+  - *Output Speed*: 30–60 RPM at axle, delivering 0.2–0.5 m/s travel speed through 250–350 mm drive wheels.
+- **Binding System Actuator**:
+  - *Type*: 12V/24V high-torque low-RPM worm gear motor (or mini linear actuator), ~30–50W.
+  - *Function*: Drives the rotating twine ring around the compressed bundle and operates the mechanical twine cutter.
 
-## 4. Engineering Relevance
-- All electrical components must be housed within a ventilated, dust-proof NEMA 4X / IP65 enclosure with positive internal pressure or sealed heat pipe exchangers.
-- Emergency stop lines must cut coil power to safety contactors in hardware, isolating all high-voltage motor drivers independently of MCU software state.
+### 2.2 Energy Storage & Power Management
+- **Battery Pack**:
+  - *Chemistry*: Lithium Iron Phosphate (LiFePO4).
+  - *Rating*: 24V (nominal), ~30 Ah capacity (~720 Wh nominal energy).
+  - *Advantages*: Lighter than lead-acid, high thermal stability, > 2000 deep cycle life, negligible voltage sag under load.
+  - *Protection*: Internal 40A continuous Battery Management System (BMS) with over-charge, over-discharge, short-circuit, and cell-balancing protection.
+- **Power Distribution**:
+  - Main 40A/50A DC fuse mounted immediately at the battery positive terminal.
+  - Latching red mushroom Emergency Stop switch isolating the main power bus.
+  - High-efficiency 24V-to-5V step-down buck converter (3A) supplying the ESP32 microcontroller and logic sensors.
 
-## 5. Questions to Investigate
-- Does the 48V BLDC motor generate excessive EMI that interferes with high-gain current sense amplifiers or I2C sensor buses?
-- What is the peak thermal dissipation of the combined power supplies inside the sealed chassis?
+### 2.3 Microcontroller & Embedded Control
+- **Microcontroller**: ESP32 DevKit V1 (38-pin, dual-core Tensilica Xtensa 32-bit LX6, 240 MHz).
+- **Core Responsibilities**:
+  - PWM generation for traction and cutter motor drivers.
+  - Real-time interrupt counting for cutter RPM and wheel odometry.
+  - Fast ADC sampling for current overload protection.
+  - Finite State Machine (FSM) control for the binding sequence.
+  - Telemetry streaming over Wi-Fi / Bluetooth (BLE) to mobile/laptop dashboard.
 
-## 6. Sources
-1. Manufacturer Datasheets: Allegro ACS724, Texas Instruments INA240, Espressif ESP32-S3, Sony IMX296.
-2. Hughes, A., and Drury, B. (2019). *Electric Motors and Drives*, Newnes.
-3. Bureau of Indian Standards (BIS), *IS 15530:2005 Chaff Cutter Safety*.
+### 2.4 Sensor Suite
+1. **Cutter RPM Sensor**: A3144 Hall-effect digital latch module positioned adjacent to a rotating magnetic collar on the cutter shaft.
+2. **Current Overload Sensor**: ACS712 (30A) or ACS724 Hall-effect current sensor inline with the cutter motor supply to detect stem jams and trigger automatic shutdown.
+3. **Battery Voltage Monitor**: High-precision resistor divider (e.g., 100kΩ / 10kΩ) connected to ESP32 ADC pin with RC low-pass filter.
+4. **Wheel Encoder**: Photoelectric or magnetic hall encoder on the wheel axle for speed calculation (0.2–0.5 m/s) and distance tracking.
+5. **Limit Switches**: Heavy-duty micro-switches to detect binding ring home position, bundle compression threshold, and release gate closure.
+
+---
+
+## 3. Power Architecture Schematic Block Diagram
+
+```
+[ 24V, 30Ah LiFePO4 Battery ]
+             |
+    [ 40A Main Fuse ]
+             |
+    [ Emergency Stop ]
+             |
+             +-----------------------+-----------------------+
+             |                       |                       |
+             v                       v                       v
+    [ Cutter Driver ]       [ Traction Driver ]     [ DC-DC 5V Buck ]
+             |                       |                       |
+             v                       v                       v
+     Cutter Motor (500W)     Traction Motor (250W)      [ ESP32 MCU ]
+             |                       |                       |
+    [ Hall RPM + ACS712 ]     [ Wheel Encoder ]    [ Limit Switches & Logs ]
+```

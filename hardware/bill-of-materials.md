@@ -1,66 +1,67 @@
-# Preliminary Bill of Materials (BOM)
+# Preliminary Bill of Materials (BOM) & Budget Estimation
+
+> **Project**: Design and Development of a Compact Electric Plant Cutting, Gathering and Binding Machine for Future Mulberry Application  
+> **Phase**: Stage 1 — Prototype-1 Mini Model (Proof of Concept)  
+> **Target Prototype Budget**: **₹45,000 INR** (~$540 USD)
+
+---
+
+## 1. Prototype-1 Target Cost Breakdown
+
+| Subsystem / Category | Key Included Components | Target Cost (INR) | % of Budget |
+|---|---|---|---|
+| **Battery & Power System** | 24V (~30Ah) LiFePO4 battery pack, BMS, charger | ₹9,000 | 20.0% |
+| **Chassis & Fabrication** | MS square tubing (25×25×2mm, 8-12m), sheet metal, welding/machining | ₹8,000 | 17.8% |
+| **Motors & Controllers** | 24V ~500W cutter motor, 24V ~250W geared traction motor, motor drivers | ₹7,000 | 15.6% |
+| **Transmission System** | Shafts, UCP pillow blocks, chains, sprockets, pulleys, timing belts | ₹4,500 | 10.0% |
+| **Binding Mechanism** | Spool mount, guide ring, small gear motor / actuator, twine tensioner, cutter | ₹3,500 | 7.8% |
+| **Electronics & Sensors** | ESP32 MCU, Hall RPM sensor, ACS712 current sensor, wheel encoder, limit switches | ₹3,000 | 6.7% |
+| **Wheels & Mobility** | Drive wheels (250–350mm dia), front caster / support skid assembly | ₹2,500 | 5.6% |
+| **Cutter Assembly** | Rotary cutting blade, hub adapter, blade guard enclosure | ₹2,000 | 4.4% |
+| **Safety & Miscellaneous** | Heavy-duty E-stop switch, main fuse, wiring, hardware fasteners, contingency | ₹5,500 | 12.2% |
+| **TOTAL TARGET COST** | **Complete Prototype-1 Proof-of-Concept Machine** | **₹45,000** | **100%** |
+
+*Note: Component pricing represents preliminary engineering estimates sourced from domestic Indian industrial and hobbyist suppliers. Actual procurement costs will be verified prior to final purchasing.*
+
+---
+
+## 2. Detailed Itemized Subsystem Breakdown
+
+### 2.1 Mechanical & Frame Subsystem
+- **MS Square Tubing**: 25 mm × 25 mm × 2 mm (8 – 12 metres required for chassis backbone and uprights)
+- **MS Sheet Metal**: 1.5 – 2.0 mm thickness for gathering chute, deflector plates, and blade guard
+- **Cutter Shaft**: Precision-turned mild steel or EN8 shaft (20–25 mm diameter)
+- **Bearings**: UCP 204 / UCP 205 pillow-block ball bearings (self-aligning)
+- **Plant Guide Rods**: 8 – 10 mm MS round bars angled into divergent wedge profile
+- **Hardware & Fasteners**: Grade 8.8 M6/M8/M10 bolts, nyloc nuts, tension springs
+
+### 2.2 Powertrain & Actuation Subsystem
+- **Traction Drive**: 24V DC geared motor (~250W nominal, 30–60 RPM output)
+- **Cutter Drive**: 24V DC motor (~500W, 3000–4000 RPM base speed) with 3:1 to 5:1 speed reduction
+- **Motor Speed Drivers**: High-current dual H-bridge / PWM DC motor controllers (24V, 30–40A peak)
+- **Binding Drive**: Small high-torque 12V/24V worm geared motor or linear actuator (~30–50W)
+
+### 2.3 Electrical, Sensing & Safety Subsystem
+- **Primary Energy Storage**: 24V LiFePO4 battery pack (~30Ah nominal, ~720 Wh) with built-in Battery Management System (BMS)
+- **Microcontroller**: ESP32 Dev Module (Dual-core 240 MHz, Wi-Fi/Bluetooth, hardware timer PWM)
+- **Current Sensing**: ACS712 (30A) or ACS724 Hall-effect current sensor module
+- **Speed & RPM Sensing**: A3144 Hall-effect sensor with neodymium magnet disk on cutter shaft
+- **Mobility Feedback**: Optical or magnetic quadrature encoder on drive wheel axle
+- **Mechanical Endstops**: Micro-switch limit switches on binding ring and compression arms
+- **Safety Interlock**: Latching red mushroom Emergency Stop (E-Stop) switch and 40A DC inline fuse
+
+---
+
+## 3. Market Cost Comparison
+
+Indicative market prices in India for existing commercial harvesting and binding machinery:
+
+| Equipment Category | Commercial Market Price Range (India) | Characteristics & Limitations |
+|---|---|---|
+| **Mini Power Reaper (Petrol/Diesel)** | ₹35,000 – ₹60,000 | Cuts crops (paddy/wheat) and lays them in windrows; **no gathering or binding** capability. |
+| **Commercial Walking Reaper** | ₹1,30,000+ | High-throughput, heavy IC engine; non-modular, unwieldy for small plots, noisy. |
+| **Commercial Reaper-Binder** | ₹2,40,000 – ₹5,00,000+ | Large self-propelled diesel machines for wheat/rice. Incompatible with sericultural row spacings or mulberry shoots. |
+| **Proposed Electric Prototype-1** | **~₹45,000** | **Compact, battery-electric, zero-emissions, modular platform** validating cutting, gathering, and binding with low mechanical risk. |
 
 > [!NOTE]
-> This Bill of Materials represents a preliminary, exploratory estimate for the laboratory testbench and Phase 6 prototype instrumentation. Component selections and costs are subject to engineering revision following empirical trade-off studies.
-
----
-
-## 1. Mechanical Subsystem
-
-| Item # | Component Description | Specification | Qty | Target Unit Cost (INR / USD) | Status |
-|---|---|---|---|---|---|
-| M-01 | Rotary Cutter Drum Assembly | Cylindrical steel drum, 3 helical knife mounts, 150 mm dia × 250 mm length | 1 | ₹8,500 / $102 | Concept Design |
-| M-02 | Helical Shear Blades | Hardened AISI 440C / D2 tool steel (58–60 HRC), single bevel 28° | 3 | ₹3,600 / $43 | Sourcing specs |
-| M-03 | Stationary Ledger Bar (Anvil) | AISI D2 hardened shear plate with ground edge, clearance adjustment slot | 1 | ₹2,200 / $26 | Sourcing specs |
-| M-04 | Fluted Intake Feed Rollers | Polyurethane fluted sleeve over steel core, spring-tensioned mounting | 2 | ₹3,000 / $36 | Concept Design |
-| M-05 | Machine Chassis / Frame | 4040 / 3030 T-slot aluminum extrusion or welded mild-steel box section | 1 | ₹7,500 / $90 | Structural planning |
-| M-06 | Cutting Chamber Enclosure | AISI 304 stainless steel sheet metal, hinged inspection hood | 1 | ₹6,000 / $72 | Safety planning |
-| M-07 | Bearings & Housings | Heavy-duty pillow block bearings (UCP 205/206), double-sealed | 4 | ₹2,400 / $29 | Off-the-shelf |
-
----
-
-## 2. Electromechanical & Drive Subsystem
-
-| Item # | Component Description | Specification | Qty | Target Unit Cost (INR / USD) | Status |
-|---|---|---|---|---|---|
-| E-01 | Cutter Drum Motor | 48V DC, 1000W BLDC Motor, 3000 RPM nominal, Hall sensors | 1 | ₹9,500 / $114 | Research phase |
-| E-02 | BLDC Motor Controller / Driver | 48V, 30A continuous, UART/PWM/CAN interface, regenerative braking | 1 | ₹4,500 / $54 | Research phase |
-| E-03 | Feed Roller Stepper Motor | NEMA 34 High Torque (4.5 N·m) with 5:1 planetary gearbox | 1 | ₹5,500 / $66 | Research phase |
-| E-04 | Stepper Motor Driver | Digital Microstepping Driver (e.g., DM860 / TMC5160) | 1 | ₹2,200 / $26 | Off-the-shelf |
-| E-05 | Main Power Supply (48V) | 48V DC, 25A (1200W) Industrial SMPS | 1 | ₹5,000 / $60 | Off-the-shelf |
-| E-06 | Auxiliary Power Supply (24V/5V) | 24V DC / 5A SMPS + DC-DC 5V Buck | 1 | ₹1,800 / $22 | Off-the-shelf |
-
----
-
-## 3. Sensing & IoT Subsystem
-
-| Item # | Component Description | Specification | Qty | Target Unit Cost (INR / USD) | Status |
-|---|---|---|---|---|---|
-| S-01 | Motor Current Sensor | ACS724 (50A, Hall-effect isolated) or INA240 current shunt module | 2 | ₹800 / $10 | Off-the-shelf |
-| S-02 | Accelerometer (Vibration) | ADXL345 (SPI/I2C 3-axis) or industrial 4–20mA IEPE | 1 | ₹600 / $7 | Off-the-shelf |
-| S-03 | Optical RPM Encoder / Hall | Hall proximity sensor with multi-pole magnetic target disc | 2 | ₹500 / $6 | Off-the-shelf |
-| S-04 | Camera Module | Raspberry Pi Global Shutter Camera (Sony IMX296, C-mount lens) | 1 | ₹4,200 / $50 | Research phase |
-| S-05 | Acoustic Microphone Module | I2S Digital MEMS Microphone (e.g., INMP441) with acoustic horn | 1 | ₹350 / $4 | Off-the-shelf |
-
----
-
-## 4. Compute, Control & Safety
-
-| Item # | Component Description | Specification | Qty | Target Unit Cost (INR / USD) | Status |
-|---|---|---|---|---|---|
-| C-01 | Low-Level Controller | ESP32-S3 DevKit (Dual-core 240MHz, FreeRTOS, CAN/UART/ADC) | 1 | ₹750 / $9 | Off-the-shelf |
-| C-02 | Edge AI SBC | Raspberry Pi 5 (4GB RAM) + Active Heatsink Cooler | 1 | ₹6,800 / $82 | Bench evaluation |
-| C-03 | Safety Relays & E-Stop | Latching Mushroom E-stop switch + Dual-channel safety contactor | 1 | ₹2,800 / $34 | Mandatory safety |
-| C-04 | Interlock Switches | Magnetic non-contact safety door switches (IP67) | 2 | ₹1,500 / $18 | Mandatory safety |
-| C-05 | Electrical Enclosure | IP65 Polycarbonate/steel hinged enclosure with cable glands | 1 | ₹2,500 / $30 | Off-the-shelf |
-
----
-
-## Cost Summary (Preliminary Testbench)
-
-- **Mechanical Subsystem**: ~₹30,700 ($368)
-- **Drive Subsystem**: ~₹28,500 ($342)
-- **Sensing Subsystem**: ~₹6,450 ($77)
-- **Compute, Control & Safety**: ~₹14,350 ($173)
-- **Estimated Prototype Total**: **~₹80,000 (~$960 USD)**
-- *Commercial Target Target at Scale (1,000 units)*: **< ₹35,000 (~$420 USD)** achieved via consolidated sheet metal tooling, custom BLDC stator winding, integrated PCB, and volume procurement.
+> This comparison does not claim equivalent industrial throughput. Commercial machines have high mass, high horsepower, and are designed for large cereal crop monocultures. The purpose of this student prototype is to pioneer an affordable, modular, clean-energy research platform specifically oriented toward the ergonomics and row constraints of sericultural mulberry farming.
